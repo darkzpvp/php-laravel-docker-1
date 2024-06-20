@@ -9,8 +9,7 @@ WORKDIR /var/www/html
 # Copiar la aplicación Laravel
 COPY . .
 
-# Instalar dependencias de Composer
-RUN composer install
+
 
 # Configuración de la imagen
 ENV SKIP_COMPOSER 1
