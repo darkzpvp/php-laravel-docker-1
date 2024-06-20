@@ -3,13 +3,17 @@ FROM richarvey/nginx-php-fpm:3.1.6
 # Instalación de php-pgsql
 RUN apk --no-cache add postgresql-dev && docker-php-ext-install pdo pdo_pgsql
 
+# Instalar Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
 # Establecer el directorio de trabajo
 WORKDIR /var/www/html
 
 # Copiar la aplicación Laravel
 COPY . .
 
-
+# Instalar dependencias de Composer
+RUN composer install --no-dev --no-interaction --optimize-autoloader
 
 # Configuración de la imagen
 ENV SKIP_COMPOSER 1
