@@ -6,11 +6,20 @@ RUN apk --no-cache add postgresql-dev && docker-php-ext-install pdo pdo_pgsql
 # Instalar Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Limpiar el caché de Composer
+RUN composer clear-cache
+
+# Actualizar Composer
+RUN composer self-update
+
 # Establecer el directorio de trabajo
 WORKDIR /var/www/html
 
 # Copiar la aplicación Laravel
 COPY . .
+
+# Actualizar dependencias de Composer
+RUN composer update --no-interaction
 
 # Instalar dependencias de Composer
 RUN composer install --no-dev --no-interaction --optimize-autoloader
