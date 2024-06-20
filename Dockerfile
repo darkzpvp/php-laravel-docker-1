@@ -6,6 +6,9 @@ RUN apk --no-cache add postgresql-dev && docker-php-ext-install pdo pdo_pgsql
 # Copiar la aplicación Laravel
 COPY . .
 
+# Instalar dependencias de Composer
+RUN composer install --no-dev --no-interaction --optimize-autoloader
+
 # Configuración de la imagen
 ENV SKIP_COMPOSER 1
 ENV WEBROOT /var/www/html/public
