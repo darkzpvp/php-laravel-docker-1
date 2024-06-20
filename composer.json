@@ -9,7 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
-        "laravel/framework": "^11.7", // Ajusta la versión de Laravel Framework según la compatibilidad con Sanctum
+        "laravel/framework": "^11.7", 
         "laravel/tinker": "^2.9",
         "laravel/sanctum": "^3.3"
     },
