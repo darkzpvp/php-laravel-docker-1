@@ -25,6 +25,9 @@ RUN composer update --no-interaction --no-scripts
 # Install Composer dependencies for production
 RUN composer install --no-dev --no-interaction --optimize-autoloader
 
+# Publish Sanctum configuration
+RUN php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+
 # Set up environment variables for the container
 ENV SKIP_COMPOSER 1
 ENV WEBROOT /var/www/html/public
