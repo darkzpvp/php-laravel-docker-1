@@ -8,20 +8,32 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     /**
-     * Define the application's command schedule.
+     * The Artisan commands provided by your application.
+     *
+     * @var array
      */
-    protected function schedule(Schedule $schedule): void
+    protected $commands = [
+        //
+    ];
+
+    /**
+     * Define the application's command schedule.
+     *
+     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @return void
+     */
+    protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
-        $schedule->command('suscripcion:create')->daily(); //Resetea los prompts de las suscripciones a su valor
-        $schedule->command('suscripcion:caducada')->daily(); //Analiza suscripciones caducadas y las borra
-        $schedule->command('app:usuario-imagen')->monthly(); //Analiza imagenes en la carpeta y si no existe, desvincula la imagen del usuario en la bbdd
-    }                                                          //esto puede ser util por si pierdo las imagenes
+        // $schedule->command('inspire')
+        //          ->hourly();
+    }
 
     /**
      * Register the commands for the application.
+     *
+     * @return void
      */
-    protected function commands(): void
+    protected function commands()
     {
         $this->load(__DIR__.'/Commands');
 
