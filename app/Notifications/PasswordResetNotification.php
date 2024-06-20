@@ -31,7 +31,7 @@ class PasswordResetNotification extends Notification
             ->subject('Restablecer Contraseña')
             ->greeting('Hola ' . $this->user->name . ',')
             ->line('Recibes este correo electrónico porque solicitaste un cambio de contraseña para tu cuenta.')
-            ->action('Cambiar Contraseña', url('https://forstai.ddns.net/reset/'.$this->token))
+            ->action('Cambiar Contraseña', url('https://forst-ai.vercel.app/reset/'.$this->token))
             ->line('Si no solicitaste este cambio de contraseña, no es necesario realizar ninguna acción.')
             ->salutation('Gracias, ' . config('app.name'));
     }
