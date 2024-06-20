@@ -3,6 +3,9 @@ FROM richarvey/nginx-php-fpm:3.1.6
 # Instalación de php-pgsql
 RUN apk --no-cache add postgresql-dev && docker-php-ext-install pdo pdo_pgsql
 
+# Establecer el directorio de trabajo
+WORKDIR /var/www/html
+
 # Copiar la aplicación Laravel
 COPY . .
 
