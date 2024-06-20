@@ -10,7 +10,7 @@ WORKDIR /var/www/html
 COPY . .
 
 # Instalar dependencias de Composer
-RUN composer install --no-dev --no-interaction --optimize-autoloader
+RUN composer install
 
 # Configuración de la imagen
 ENV SKIP_COMPOSER 1
