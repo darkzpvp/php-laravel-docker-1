@@ -8,34 +8,32 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.1",
-        "guzzlehttp/guzzle": "^7.2",
-        "intervention/image": "^3.6",
+        "php": "^8.0",
         "laravel/framework": "^11.0",
-        "laravel/horizon": "^5.24",
-        "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.9",
-        "livewire/livewire": "^3.4",
-        "predis/predis": "^2.2",
-        "pusher/pusher-php-server": "^7.2",
-        "s-ichikawa/laravel-sendgrid-driver": "^4.0"
+        "laravel/sanctum": "^3.3"
+
     },
     "require-dev": {
         "filp/whoops": "^2.15",
         "fakerphp/faker": "^1.23",
-        "laravel/pint": "^1.0",
-        "laravel/sail": "^1.18",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.1",
-        "phpunit/phpunit": "^11.0",
-        "spatie/laravel-ignition": "^2.0"
+        "phpunit/phpunit": "^11.0"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
-            "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/",
-            "App\\Http\\Livewire\\": "app/Http/Livewire/"
+            "App\\": "app/"
         },
         "classmap": [
             "database/seeds",
@@ -47,36 +45,18 @@
             "Tests\\": "tests/"
         }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
         ],
-        "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
-        ],
         "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-            "@php artisan key:generate --ansi"
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ]
-    },
-    "extra": {
-        "laravel": {
-            "dont-discover": []
-        }
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true,
-        "allow-plugins": {
-            "pestphp/pest-plugin": true,
-            "php-http/discovery": true
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
