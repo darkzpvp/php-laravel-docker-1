@@ -21,10 +21,9 @@ WORKDIR /var/www/html
 COPY . .
 
 # Update Composer dependencies (if needed)
-RUN composer update --no-interaction --no-scripts --with-all-dependencies
-
+RUN composer update --no-interaction --no-scripts
 # Install Composer dependencies for production
-RUN composer install --no-dev --no-interaction --optimize-autoloader --with-all-dependencies
+RUN composer install --no-dev --no-interaction --optimize-autoloader
 
 # Set up environment variables for the container
 ENV SKIP_COMPOSER 1
