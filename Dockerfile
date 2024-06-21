@@ -67,7 +67,7 @@ RUN php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvide
 RUN ls -la
 
 # Run Laravel migrations with --force flag
-RUN php artisan migrate:fresh --force
+RUN php artisan migrate --force
 
 
 #VINCULAR IMAGENES

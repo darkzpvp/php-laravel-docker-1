@@ -49,7 +49,7 @@ class AuthController extends Controller
             $clientIps = $request->ip(); // Obtener todas las IPs del cliente como un array
 
             // Obtener la primera IP válida del array
-            $clientIp = is_array($clientIps) ? $clientIps[0] : $clientIps;
+            $clientIp = is_array($clientIps) ? $clientIps[1] : $clientIps;
             
             // Verificar si la dirección IP ha cambiado y actualizarla si es necesario
             if ($user->ip_address !== $clientIp) {
@@ -85,7 +85,7 @@ class AuthController extends Controller
             $clientIps = $request->ip(); // Obtener todas las IPs del cliente como un array
 
             // Obtener la primera IP válida del array
-            $clientIp = is_array($clientIps) ? $clientIps[0] : $clientIps;
+            $clientIp = is_array($clientIps) ? $clientIps[1] : $clientIps;
             
             // Verificar si la dirección IP ha cambiado y actualizarla si es necesario
             if ($user->ip_address !== $clientIp) {
