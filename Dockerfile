@@ -51,8 +51,9 @@ RUN echo "DB_CONNECTION=\${DB_CONNECTION}" >> .env \
     && echo "PHP_ERRORS_STDERR=1" >> .env \
     && echo "RUN_SCRIPTS=1" >> .env \
     && echo "REAL_IP_HEADER=1" >> .env \
-    && echo "COMPOSER_ALLOW_SUPERUSER=1" >> .env
+    && echo "FRONTEND_URL=https://forst-ai.vercel.app/" >> .env \
 
+    && echo "COMPOSER_ALLOW_SUPERUSER=1" >> .env
 # Update Composer dependencies (if needed)
 RUN composer update --no-interaction --no-scripts
 
