@@ -46,12 +46,12 @@ class AuthController extends Controller
                 'password' => bcrypt($request->input('password'))
             ]);
     
-            // Obtener la dirección IP del usuario desde el encabezado 'X-Forwarded-For' o directamente desde la solicitud
-            $clientIp = $request->header('X-Forwarded-For') ?? $request->ip();
-    
-            // Guardar la dirección IP del usuario
-            $user->ip_address = $clientIp;
-            $user->save();
+            $clientIp = $request->ip();  
+
+            if ($user->ip_address !== $clientIp) {
+                $user->ip_address = $clientIp;
+                $user->save();
+            }
     
             // Retornar el token de autenticación y la información del usuario
             return [
@@ -78,9 +78,8 @@ class AuthController extends Controller
             $user = Auth::user();
     
             // Obtener la dirección IP del usuario desde el encabezado 'X-Forwarded-For' o directamente desde la solicitud
-            $clientIp = $request->header('X-Forwarded-For') ?? $request->ip();
-    
-            // Verificar si la dirección IP ha cambiado y actualizarla si es necesario
+            $clientIp = $request->ip();  
+
             if ($user->ip_address !== $clientIp) {
                 $user->ip_address = $clientIp;
                 $user->save();
