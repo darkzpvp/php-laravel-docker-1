@@ -30,8 +30,15 @@ RUN composer install --no-dev --no-interaction --optimize-autoloader
 
 # Publish Sanctum configuration
 RUN php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
-# Run Laravel migrations
+
+# Debugging: Check current directory content
+RUN ls -la
+
+# Run Laravel migrations with --force flag
 RUN php artisan migrate --force
+
+# Debugging: Check migration status
+RUN php artisan migrate:status
 
 # Define the command to start the container
 CMD ["/start.sh"]
