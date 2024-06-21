@@ -69,8 +69,8 @@ RUN ls -la
 # Run Laravel migrations with --force flag
 RUN php artisan migrate --force
 
-# Debugging: Check migration status
-RUN php artisan migrate:status
 
+#VINCULAR IMAGENES
+RUN php artisan storage:link
 # Define the command to start the container
 CMD ["/start.sh"]
