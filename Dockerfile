@@ -36,6 +36,16 @@ RUN echo "DB_CONNECTION=\${DB_CONNECTION}" >> .env \
     && echo "DB_USERNAME=\${DB_USERNAME}" >> .env \
     && echo "DB_PASSWORD=\${DB_PASSWORD}" >> .env \
     && echo "" >> .env \
+    && echo "MAIL_MAILER=smtp" >> .env \
+    && echo "MAIL_HOST=smtp.gmail.com" >> .env \
+    && echo "MAIL_PORT=587" >> .env \
+    && echo "MAIL_USERNAME=victor01val@gmail.com" >> .env \
+    && echo "MAIL_PASSWORD='ceog zxpe nqgk agqw'" >> .env \
+    && echo "MAIL_ENCRYPTION=tls" >> .env \
+    && echo "MAIL_FROM_ADDRESS=victor01val@gmail.com" >> .env \
+    && echo "MAIL_FROM_NAME=\${APP_NAME}" >> .env \
+    && echo "APP_NAME=ForstAI" >> .env \
+    && echo "" >> .env \
     && echo "SKIP_COMPOSER=1" >> .env \
     && echo "WEBROOT=/var/www/html/public" >> .env \
     && echo "PHP_ERRORS_STDERR=1" >> .env \
@@ -45,6 +55,7 @@ RUN echo "DB_CONNECTION=\${DB_CONNECTION}" >> .env \
 
 # Update Composer dependencies (if needed)
 RUN composer update --no-interaction --no-scripts
+
 # Install Composer dependencies for production
 RUN composer install --no-dev --no-interaction --optimize-autoloader
 
