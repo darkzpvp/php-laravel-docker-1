@@ -20,8 +20,28 @@ WORKDIR /var/www/html
 # Copy the Laravel application files into the container
 COPY . .
 
-# Copy the .env file into the container
-COPY .env /var/www/html/.env
+# Define environment variables for PostgreSQL
+ENV DB_CONNECTION=pgsql
+ENV DB_HOST=dpg-cpq6vdiju9rs739vhhc0-a.oregon-postgres.render.com
+ENV DB_PORT=5432
+ENV DB_DATABASE=backend_tk3k
+ENV DB_USERNAME=backend_tk3k_user
+ENV DB_PASSWORD=nThLcF8blTLgnJ7y4JKlugyIrSRyfbf5
+
+# Create .env file with environment variables
+RUN echo "DB_CONNECTION=\${DB_CONNECTION}" >> .env \
+    && echo "DB_HOST=\${DB_HOST}" >> .env \
+    && echo "DB_PORT=\${DB_PORT}" >> .env \
+    && echo "DB_DATABASE=\${DB_DATABASE}" >> .env \
+    && echo "DB_USERNAME=\${DB_USERNAME}" >> .env \
+    && echo "DB_PASSWORD=\${DB_PASSWORD}" >> .env \
+    && echo "" >> .env \
+    && echo "SKIP_COMPOSER=1" >> .env \
+    && echo "WEBROOT=/var/www/html/public" >> .env \
+    && echo "PHP_ERRORS_STDERR=1" >> .env \
+    && echo "RUN_SCRIPTS=1" >> .env \
+    && echo "REAL_IP_HEADER=1" >> .env \
+    && echo "COMPOSER_ALLOW_SUPERUSER=1" >> .env
 
 # Update Composer dependencies (if needed)
 RUN composer update --no-interaction --no-scripts
