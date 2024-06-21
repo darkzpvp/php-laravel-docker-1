@@ -27,6 +27,8 @@ RUN composer install --no-dev --no-interaction --optimize-autoloader
 
 # Publish Sanctum configuration
 RUN php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+# Run Laravel migrations
+RUN php artisan migrate --force
 
 # Set up environment variables for the container
 ENV SKIP_COMPOSER 1
