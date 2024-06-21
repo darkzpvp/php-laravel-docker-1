@@ -93,7 +93,7 @@ class AuthController extends Controller
             ];
         } catch (\Exception $e) {
             // Manejar cualquier error que ocurra durante el proceso de autenticación
-            return response()->json(['error' => 'Error al iniciar sesión'], 500);
+            return response()->json(['error' => 'Error al iniciar sesión', 'exception' => $e->getMessage()], 500);
         }
     }
 
