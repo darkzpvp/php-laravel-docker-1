@@ -60,7 +60,7 @@ class AuthController extends Controller
             ];
         } catch (\Exception $e) {
             // Manejar cualquier error que ocurra durante el proceso de registro
-            return response()->json(['error' => 'Error al registrar el usuario'], 500);
+            return response()->json(['error' => 'Error al registrar el usuario', 'exception' => $e->getMessage()], 500);
         }
     }
     
