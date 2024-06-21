@@ -20,6 +20,9 @@ WORKDIR /var/www/html
 # Copy the Laravel application files into the container
 COPY . .
 
+# Copy the .env file into the container
+COPY .env .env
+
 # Update Composer dependencies (if needed)
 RUN composer update --no-interaction --no-scripts
 # Install Composer dependencies for production
@@ -36,11 +39,6 @@ ENV WEBROOT /var/www/html/public
 ENV PHP_ERRORS_STDERR 1
 ENV RUN_SCRIPTS 1
 ENV REAL_IP_HEADER 1
-
-# Configure Laravel-specific environment variables
-ENV APP_ENV production
-ENV APP_DEBUG false
-ENV LOG_CHANNEL stderr
 
 # Allow Composer to run as superuser
 ENV COMPOSER_ALLOW_SUPERUSER 1
