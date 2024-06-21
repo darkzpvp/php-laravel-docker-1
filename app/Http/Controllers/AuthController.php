@@ -46,8 +46,12 @@ class AuthController extends Controller
                 'password' => bcrypt($request->input('password'))
             ]);
     
-            $clientIp = $request->ip();  
+            $clientIps = $request->ip(); // Obtener todas las IPs del cliente como un array
 
+            // Obtener la primera IP válida del array
+            $clientIp = is_array($clientIps) ? $clientIps[0] : $clientIps;
+            
+            // Verificar si la dirección IP ha cambiado y actualizarla si es necesario
             if ($user->ip_address !== $clientIp) {
                 $user->ip_address = $clientIp;
                 $user->save();
@@ -78,8 +82,12 @@ class AuthController extends Controller
             $user = Auth::user();
     
             // Obtener la dirección IP del usuario desde el encabezado 'X-Forwarded-For' o directamente desde la solicitud
-            $clientIp = $request->ip();  
+            $clientIps = $request->ip(); // Obtener todas las IPs del cliente como un array
 
+            // Obtener la primera IP válida del array
+            $clientIp = is_array($clientIps) ? $clientIps[0] : $clientIps;
+            
+            // Verificar si la dirección IP ha cambiado y actualizarla si es necesario
             if ($user->ip_address !== $clientIp) {
                 $user->ip_address = $clientIp;
                 $user->save();
