@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->string('ip_address')->nullable();
             $table->string('estado')->default('Desconectado');
             $table->string('ultima_sesion')->nullable();
-            $table->number('rol')->default(0);
+            $table->integer('rol')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
