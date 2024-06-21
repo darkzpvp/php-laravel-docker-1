@@ -25,10 +25,6 @@ RUN composer update --no-interaction --no-scripts
 # Install Composer dependencies for production
 RUN composer install --no-dev --no-interaction --optimize-autoloader
 
-# Publish Sanctum configuration
-RUN php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
-# Run Laravel migrations
-RUN php artisan migrate
 
 # Set up environment variables for the container
 ENV SKIP_COMPOSER=1
@@ -46,5 +42,9 @@ ENV DB_DATABASE=backend_tk3k
 ENV DB_USERNAME=backend_tk3k_user
 ENV DB_PASSWORD=nThLcF8blTLgnJ7y4JKlugyIrSRyfbf5
 
+# Publish Sanctum configuration
+RUN php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+# Run Laravel migrations
+RUN php artisan migrate
 # Define the command to start the container
 CMD ["/start.sh"]
