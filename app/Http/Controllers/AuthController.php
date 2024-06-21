@@ -46,16 +46,21 @@ class AuthController extends Controller
                 'password' => bcrypt($request->input('password'))
             ]);
     
-            $clientIps = $request->ip(); // Obtener todas las IPs del cliente como un array
+            // Obtener la dirección IP del usuario desde el encabezado 'X-Forwarded-For' o directamente desde la solicitud
+            $clientIp = $request->header('X-Forwarded-For');
 
-            // Obtener la primera IP válida del array
-            $clientIp = is_array($clientIps) ? $clientIps[1] : $clientIps;
-            
-            // Verificar si la dirección IP ha cambiado y actualizarla si es necesario
-            if ($user->ip_address !== $clientIp) {
-                $user->ip_address = $clientIp;
-                $user->save();
+            // Verificar si $clientIp es una cadena y contiene comas
+            if (is_string($clientIp) && strpos($clientIp, ',') !== false) {
+                // Dividir la cadena por comas y obtener el primer elemento
+                $clientIp = explode(',', $clientIp)[0];
             }
+            
+            // Si $clientIp sigue siendo null o no es una cadena válida, usar $request->ip()
+            $clientIp = trim($clientIp) ?: $request->ip();
+            
+            // Guardar la dirección IP del usuario
+            $user->ip_address = $clientIp;
+            $user->save();
     
             // Retornar el token de autenticación y la información del usuario
             return [
@@ -81,18 +86,20 @@ class AuthController extends Controller
             // Obtener al usuario autenticado
             $user = Auth::user();
     
-            // Obtener la dirección IP del usuario desde el encabezado 'X-Forwarded-For' o directamente desde la solicitud
-            $clientIps = $request->ip(); // Obtener todas las IPs del cliente como un array
+            $clientIp = $request->header('X-Forwarded-For');
 
-            // Obtener la primera IP válida del array
-            $clientIp = is_array($clientIps) ? $clientIps[1] : $clientIps;
-            
-            // Verificar si la dirección IP ha cambiado y actualizarla si es necesario
-            if ($user->ip_address !== $clientIp) {
-                $user->ip_address = $clientIp;
-                $user->save();
+            // Verificar si $clientIp es una cadena y contiene comas
+            if (is_string($clientIp) && strpos($clientIp, ',') !== false) {
+                // Dividir la cadena por comas y obtener el primer elemento
+                $clientIp = explode(',', $clientIp)[0];
             }
-    
+            
+            // Si $clientIp sigue siendo null o no es una cadena válida, usar $request->ip()
+            $clientIp = trim($clientIp) ?: $request->ip();
+            
+            // Guardar la dirección IP del usuario
+            $user->ip_address = $clientIp;
+            $user->save();
             // Retornar el token de autenticación y la información del usuario
             return [
                 'token' => $user->createToken('token')->plainTextToken,
