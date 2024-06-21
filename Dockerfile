@@ -20,8 +20,6 @@ WORKDIR /var/www/html
 # Copy the Laravel application files into the container
 COPY . .
 
-# Copy the .env file into the container
-COPY .env .env
 
 # Update Composer dependencies (if needed)
 RUN composer update --no-interaction --no-scripts
