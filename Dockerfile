@@ -43,7 +43,7 @@ RUN echo "DB_CONNECTION=\${DB_CONNECTION}" >> .env \
     && echo "MAIL_PASSWORD='ceog zxpe nqgk agqw'" >> .env \
     && echo "MAIL_ENCRYPTION=tls" >> .env \
     && echo "MAIL_FROM_ADDRESS=victor01val@gmail.com" >> .env \
-    && echo "MAIL_FROM_NAME=\${APP_NAME}" >> .env \
+    && echo "MAIL_FROM_NAME=ForstAI" >> .env \
     && echo "APP_NAME=ForstAI" >> .env \
     && echo "" >> .env \
     && echo "SKIP_COMPOSER=1" >> .env \
